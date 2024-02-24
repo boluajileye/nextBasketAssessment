@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreRequest;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -18,6 +19,6 @@ class UserController extends Controller
      */
     public function __invoke(UserStoreRequest $request)
     {
-        return response()->json($this->userService->saveUser($request));
+        return response()->json($this->userService->saveUser($request), Response::HTTP_CREATED);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Domain\DTO\UserRequestDto;
 use App\Jobs\NotificationEventJob;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\User\UserStoreRequest;
@@ -19,7 +20,7 @@ class UserService{
      * @return UserResource
      */
     public function saveUser(UserStoreRequest $request): UserResource {
-        $user = $this->userRepository->save($request->convertToDto());
+        $user = $this->userRepository->save(new UserRequestDto($request->validated()));
 
         info("Inserted User Data", $user->toArray());
 

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\LogUserNotifyJob;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class NotifyService implements NotifyServiceInterface
@@ -17,13 +18,13 @@ class NotifyService implements NotifyServiceInterface
      * Channel property
      * @var
      */
-    protected $channel;
+    public $channel;
 
     /**
      * Application queue name
      * @var string
      */
-    protected String $queueName;
+    public String $queueName;
 
     public function __construct()
     {
@@ -71,8 +72,11 @@ class NotifyService implements NotifyServiceInterface
      */
     public function callback() {
         return function ($message) {
-            $data = unserialize($message->body);
-            info('Message User Data', $data->toArray());
+            $userData = unserialize($message->body);
+
+            LogUserNotifyJob::dispatch($userData->toArray());
+
+            info("Job dispatched");
         };
     }
 

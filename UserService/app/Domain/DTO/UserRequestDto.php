@@ -25,12 +25,12 @@ class UserRequestDto{
 
     /**
      * UserRequestDto constructor populate class parameters
-     * @param App\Http\Requests\User\UserStoreRequest $request
+     * @param array $request
      */
-    public function __construct(UserStoreRequest $request) {
-        $this->email = $request->validated('email');
-        $this->firstName = $request->validated('firstName');
-        $this->lastName = $request->validated('lastName');
+    public function __construct(array $request) {
+        $this->email = $request['email'];
+        $this->firstName = $request['firstName'];
+        $this->lastName = $request['lastName'];
     }
 
     /**
