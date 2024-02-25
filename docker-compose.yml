@@ -3,9 +3,9 @@ version: '3.8'
 services:
 
   # MySQL service
-  mysql:
+  mysql_next:
     image: mysql:8.0
-    container_name: mysql
+    container_name: mysql_next
     environment:
       MYSQL_DATABASE: laravel_db
       MYSQL_ROOT_PASSWORD: root_password
@@ -17,18 +17,18 @@ services:
       - laravel_network
 
   # Redis service
-  redis:
+  redis_next:
     image: redis:latest
-    container_name: redis
+    container_name: redis_next
     ports:
       - "6370:6379"
     networks:
       - laravel_network
 
   # RabbitMQ service
-  rabbitmq:
+  rabbitmq_next:
     image: "rabbitmq:management"
-    container_name: rabbitmq
+    container_name: rabbitmq_next
     ports:
       - "15670:15672"  # RabbitMQ management UI
       - "5670:5672"    # RabbitMQ default port
@@ -45,9 +45,9 @@ services:
       dockerfile: ./docker/apache/NotificationService/Dockerfile
     container_name: notification_app
     depends_on:
-      - mysql
-      - redis
-      - rabbitmq
+      - mysql_next
+      - redis_next
+      - rabbitmq_next
     ports:
       - "8002:80"
     networks:
@@ -63,9 +63,9 @@ services:
       dockerfile: ./docker/apache/UserService/Dockerfile
     container_name: user_app
     depends_on:
-      - mysql
-      - redis
-      - rabbitmq
+      - mysql_next
+      - redis_next
+      - rabbitmq_next
     ports:
       - "8001:80"
     networks:
