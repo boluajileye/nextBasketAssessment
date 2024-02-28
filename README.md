@@ -58,7 +58,7 @@ Follow the instruction below to setting up your project.
 - Open a new terminal and run `docker exec -it notification_app /bin/sh`
 - Run command `tail -f storage/logs/laravel.log` on your terminal
 [See Screenshot 4](https://github.com/boluajileye/nextBasketAssessment/blob/main/README.md#screenshot-4)
-- Make a post request to http://localhost:8001 (User Service) using the sample data below
+- Make a post request to http://localhost:8001/users (User Service) using the sample data below
 
 #### User Payload
 
